@@ -26,8 +26,8 @@ export async function resendOtp(req: NextRequest) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    // Email-based cooldown: 60 seconds between resends
-    const cooldown = checkCooldown(`resend-email:${email}`, 60 * 1000);
+    // Email-based cooldown: 2 minutes (120 seconds) between resends
+    const cooldown = checkCooldown(`resend-email:${email}`, 120 * 1000);
     if (!cooldown.success) {
       return NextResponse.json(
         {
