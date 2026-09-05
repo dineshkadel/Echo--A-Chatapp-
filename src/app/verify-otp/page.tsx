@@ -95,13 +95,19 @@ function VerifyOtpContent() {
       }
 
       setSuccess("A new 6-digit verification code has been sent via email!");
-      setCooldownSeconds(60); // Start 60-second visual cooldown
+      setCooldownSeconds(120); // Start 2-minute (120s) cooldown
       setResending(false);
     } catch (err: unknown) {
       console.error("Resend OTP error:", err);
       setError("Failed to resend verification code.");
       setResending(false);
     }
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}m ${secs < 10 ? "0" : ""}${secs}s`;
   };
 
   return (
@@ -198,7 +204,7 @@ function VerifyOtpContent() {
             {resending
               ? "Sending new code..."
               : cooldownSeconds > 0
-              ? `Resend Code in ${cooldownSeconds}s`
+              ? `Resend Code in ${formatTime(cooldownSeconds)}`
               : "Resend Verification Code"}
           </button>
 

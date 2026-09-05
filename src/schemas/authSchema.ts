@@ -3,7 +3,7 @@ import {z} from 'zod'
 // ZOD validation for registration
 
 export const registerSchema = z.object({
-    fullname : z.string().trim().min(3,'Full name is required'),
+    fullname : z.string().trim().min(3,'Fullname is required'),
 
     username:z.string().trim().min(3,'Username should be at least 3 characters')
     .max(12,'Username must be under 12 characters')
@@ -91,4 +91,4 @@ export const changePasswordSchema = z
     path: ["confirmNewPassword"],
   });
 
-export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
