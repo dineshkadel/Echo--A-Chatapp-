@@ -5,7 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useSocket } from "@/src/hooks/useSocket";
 import { useNotifications } from "@/src/hooks/useNotifications";
 import { getSocket } from "@/src/lib/socket";
-import SettingsModal from "@/src/components/settings/settings-modal";
+import Link from "next/link";
 
 /* ────────────────────────────── Types ────────────────────────────── */
 
@@ -71,7 +71,6 @@ export default function ChatPage() {
   const [typingUsers, setTypingUsers] = useState<Record<string, string>>({});
   const [onlineStatus, setOnlineStatus] = useState<Record<string, boolean>>({});
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
   const [allUsers, setAllUsers] = useState<Participant[]>([]);
   const [showNewChat, setShowNewChat] = useState(false);
 
@@ -503,9 +502,9 @@ export default function ChatPage() {
             )}
           </div>
 
-          {/* Settings button */}
-          <button
-            onClick={() => setShowSettings(true)}
+          {/* Settings link */}
+          <Link
+            href="/settings"
             className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white transition-all flex items-center gap-1 text-xs font-semibold"
             title="Settings & Profile"
           >
@@ -529,7 +528,7 @@ export default function ChatPage() {
               />
             </svg>
             <span className="hidden md:inline">Settings</span>
-          </button>
+          </Link>
 
           <div className="hidden sm:flex flex-col text-right">
             <span className="text-sm font-semibold text-slate-200">
@@ -549,11 +548,6 @@ export default function ChatPage() {
         </div>
       </header>
 
-      {/* Settings Modal */}
-      <SettingsModal
-        isOpen={showSettings}
-        onClose={() => setShowSettings(false)}
-      />
 
       {/* ── Main Grid ───────────────────────────────────────────────── */}
       <div className="flex-1 flex max-w-7xl w-full mx-auto p-4 md:p-6 gap-6 overflow-hidden">
