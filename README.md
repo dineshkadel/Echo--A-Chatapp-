@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) chat application with a custom Express and Socket.IO server.
+
+## Docker
+
+Create the local environment file and set the required values:
+
+```bash
+copy .env.example .env
+```
+
+Update `MONGODB_URI`, `NEXTAUTH_SECRET`, and any email settings in `.env`, then start the application and MongoDB:
+
+```bash
+docker compose up --build
+```
+
+The application is available at [http://localhost:3000](http://localhost:3000). To build or run only the application image, use `docker build -t chatapp .` and pass the variables from `.env` with `docker run --env-file .env -p 3000:3000 chatapp`.
+
+## Local development
 
 ## Getting Started
 
