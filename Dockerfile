@@ -7,7 +7,6 @@ RUN npm ci
 
 COPY . .
 
-# The database client validates this variable when the application is built.
 ENV MONGODB_URI=mongodb://localhost:27017/chatapp
 RUN npm run build
 RUN npm prune --omit=dev

@@ -29,3 +29,33 @@ export async function sendOtpEmail(email: string, username: string, otp: string)
     console.log(`[DEV FALLBACK] Verification OTP for ${email} (${username}): ${otp}`);
   }
 }
+
+export async function sendPasswordResetEmail(email: string, username: string, otp: string) {
+  try {
+    const resend = getResendClient();
+    if (!resend) {
+      console.log(`[DEV MODE - NO RESEND API KEY] Password reset OTP for ${email} (${username}): ${otp}`);
+      return;
+    }
+
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: email,
+      subject: "Reset your Echo password",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px;">
+          <h2 style="color: #2563eb;">Reset your Echo password</h2>
+          <p style="color: #475569;">Hi ${username}, use this code to reset your password:</p>
+          <div style="background-color: #f1f5f9; padding: 16px; text-align: center; border-radius: 8px; font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #1e293b; margin: 20px 0;">
+            ${otp}
+          </div>
+          <p style="color: #64748b; font-size: 14px;">This code expires in 2 minutes.</p>
+          <p style="color: #94a3b8; font-size: 12px; margin-top: 24px;">If you did not request this, you can safely ignore this email.</p>
+        </div>
+      `,
+    });
+  } catch (error) {
+    console.error("Failed to send password reset email via Resend:", error);
+    console.log(`[DEV FALLBACK] Password reset OTP for ${email} (${username}): ${otp}`);
+  }
+}

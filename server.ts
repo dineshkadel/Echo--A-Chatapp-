@@ -250,6 +250,6 @@ app.prepare().then(async () => {
   });
 
   httpServer.listen(port, () => {
-    console.log(`\n🚀 Server ready on http://${hostname}:${port}\n`);
+    console.log(`\nServer ready on http://${hostname}:${port}\n`);
   });
 });
