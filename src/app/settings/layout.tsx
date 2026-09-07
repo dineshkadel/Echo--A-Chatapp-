@@ -22,7 +22,7 @@ export default function SettingsLayout({
             <ArrowLeft size={16} />
             <span>Back to Chat</span>
           </Link>
-          <div className="h-4 w-[1px] bg-slate-800 hidden sm:block" />
+          <div className="h-4 w-px bg-slate-800 hidden sm:block" />
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
               <Settings size={16} />
@@ -35,7 +35,7 @@ export default function SettingsLayout({
       {/* Main Settings Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-6">
         <SettingsSidebar />
-        <div className="flex-1 bg-slate-900/50 border border-slate-800/90 rounded-2xl p-6 md:p-8 min-h-[500px]">
+        <div className="flex-1 bg-slate-900/50 border border-slate-800/90 rounded-2xl p-6 md:p-8 min-h-125">
           {children}
         </div>
       </main>
