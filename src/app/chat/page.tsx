@@ -401,7 +401,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col font-sans text-slate-100">
+    <div className="min-h-screen bg-background flex flex-col font-sans text-foreground">
       {/* ── Top Bar ─────────────────────────────────────────────────── */}
       <header className="bg-slate-900/90 border-b border-slate-800 px-6 py-4 flex items-center justify-between backdrop-blur-md">
         <div className="flex items-center gap-3">

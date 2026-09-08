@@ -117,6 +117,30 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Existing screens use slate utilities for their dark surfaces. Keep them in
+   sync with the semantic theme when light mode is selected. */
+.light [class*="bg-slate-950"],
+.light [class*="bg-slate-900"],
+.light [class*="bg-slate-800"] {
+  background-color: color-mix(in oklch, var(--background) 92%, var(--foreground) 8%) !important;
+}
+
+.light [class*="text-slate-100"],
+.light [class*="text-slate-200"],
+.light [class*="text-slate-300"] {
+  color: var(--foreground) !important;
+}
+
+.light [class*="text-slate-400"],
+.light [class*="text-slate-500"] {
+  color: var(--muted-foreground) !important;
+}
+
+.light [class*="border-slate-7"],
+.light [class*="border-slate-8"] {
+  border-color: var(--border) !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

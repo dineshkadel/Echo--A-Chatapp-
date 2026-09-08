@@ -30,7 +30,7 @@ app.prepare().then(async () => {
   (globalThis as any).__onlineUsers = onlineUsers;
 
   io.on("connection", (socket) => {
-    console.log(`⚡ Socket connected: ${socket.id}`);
+    console.log(` Socket connected: ${socket.id}`);
 
     socket.on("user:online", (userId: string) => {
       if (!userId) return;
@@ -58,13 +58,13 @@ app.prepare().then(async () => {
         content: string;
       }) => {
         try {
-          const Message = (await import("./src/models/Message")).default;
-          const Conversation = (await import("./src/models/Conversation"))
+          const Message = (await import("./models/Message")).default;
+          const Conversation = (await import("./models/Conversation"))
             .default;
-          const Notification = (await import("./src/models/Notification"))
+          const Notification = (await import("./models/Notification"))
             .default;
 
-          const dbConnect = (await import("./src/lib/db")).default;
+          const dbConnect = (await import("./lib/db")).default;
           await dbConnect();
 
           const message = await Message.create({
@@ -135,8 +135,8 @@ app.prepare().then(async () => {
       "message:seen",
       async (data: { conversationId: string; userId: string }) => {
         try {
-          const Message = (await import("./src/models/Message")).default;
-          const dbConnect = (await import("./src/lib/db")).default;
+          const Message = (await import("./models/Message")).default;
+          const dbConnect = (await import("./lib/db")).default;
           await dbConnect();
 
           await Message.updateMany(
@@ -152,7 +152,7 @@ app.prepare().then(async () => {
           );
 
           const Conversation = (
-            await import("./src/models/Conversation")
+            await import("./models/Conversation")
           ).default;
           const conversation = await Conversation.findById(
             data.conversationId
@@ -200,9 +200,9 @@ app.prepare().then(async () => {
       async (data: { notificationId: string; userId: string }) => {
         try {
           const Notification = (
-            await import("./src/models/Notification")
+            await import("./models/Notification")
           ).default;
-          const dbConnect = (await import("./src/lib/db")).default;
+          const dbConnect = (await import("./lib/db")).default;
           await dbConnect();
 
           await Notification.findOneAndUpdate(
@@ -223,8 +223,8 @@ app.prepare().then(async () => {
           sockets.delete(socket.id);
           if (sockets.size === 0) {
             onlineUsers.delete(userId);
-            import("./src/models/User").then(({ default: User }) =>
-              import("./src/lib/db").then(({ default: dbConnect }) =>
+            import("./models/User").then(({ default: User }) =>
+              import("./lib/db").then(({ default: dbConnect }) =>
                 dbConnect().then(() =>
                   User.findByIdAndUpdate(userId, {
                     IsOnline: false,

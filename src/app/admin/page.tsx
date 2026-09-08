@@ -45,7 +45,7 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col">
+    <div className="min-h-screen bg-background text-foreground font-sans flex flex-col">
       <AdminHeader displayName={session?.user?.username || session?.user?.email} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
