@@ -20,9 +20,7 @@ export default function PreferencesForm({
   const [profile, setProfile] = useState<UserProfileData>(initialData);
   const [loading, setLoading] = useState(false);
 
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const savePreferences = async (nextProfile: UserProfileData) => {
     setLoading(true);
     setMessage(null);
 
@@ -31,11 +29,11 @@ export default function PreferencesForm({
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullname: profile.fullname,
-          phone: profile.phone,
-          avatar: profile.avatar,
-          bio: profile.bio,
-          preferences: profile.preferences,
+          fullname: nextProfile.fullname,
+          phone: nextProfile.phone,
+          avatar: nextProfile.avatar,
+          bio: nextProfile.bio,
+          preferences: nextProfile.preferences,
         }),
       });
 
@@ -58,8 +56,15 @@ export default function PreferencesForm({
     }
   };
 
+  const updatePreferences = (preferences: UserProfileData["preferences"]) => {
+    const nextProfile = { ...profile, preferences };
+    setProfile(nextProfile);
+    setAppTheme(preferences.theme);
+    void savePreferences(nextProfile);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+    <div className="space-y-6 max-w-2xl">
       <div className="space-y-4">
         {/* Sound Notifications */}
         <div className="flex items-center justify-between p-4 bg-slate-900/80 border border-slate-800 rounded-2xl">
@@ -77,10 +82,7 @@ export default function PreferencesForm({
               type="checkbox"
               checked={profile.preferences.soundEnabled}
               onChange={(e) =>
-                setProfile((p) => ({
-                  ...p,
-                  preferences: { ...p.preferences, soundEnabled: e.target.checked },
-                }))
+                updatePreferences({ ...profile.preferences, soundEnabled: e.target.checked })
               }
               className="sr-only peer"
             />
@@ -104,10 +106,7 @@ export default function PreferencesForm({
               type="checkbox"
               checked={profile.preferences.onlineStatusVisible}
               onChange={(e) =>
-                setProfile((p) => ({
-                  ...p,
-                  preferences: { ...p.preferences, onlineStatusVisible: e.target.checked },
-                }))
+                updatePreferences({ ...profile.preferences, onlineStatusVisible: e.target.checked })
               }
               className="sr-only peer"
             />
@@ -131,10 +130,7 @@ export default function PreferencesForm({
               type="checkbox"
               checked={profile.preferences.notificationsEnabled}
               onChange={(e) =>
-                setProfile((p) => ({
-                  ...p,
-                  preferences: { ...p.preferences, notificationsEnabled: e.target.checked },
-                }))
+                updatePreferences({ ...profile.preferences, notificationsEnabled: e.target.checked })
               }
               className="sr-only peer"
             />
@@ -156,13 +152,7 @@ export default function PreferencesForm({
           <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 rounded-full p-1">
             <button
               type="button"
-              onClick={() => {
-                setProfile((p) => ({
-                  ...p,
-                  preferences: { ...p.preferences, theme: "light" },
-                }));
-                setAppTheme("light");
-              }}
+              onClick={() => updatePreferences({ ...profile.preferences, theme: "light" })}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all ${
                 profile.preferences.theme === "light"
                   ? "bg-blue-600 text-white shadow-xs"
@@ -174,13 +164,7 @@ export default function PreferencesForm({
             </button>
             <button
               type="button"
-              onClick={() => {
-                setProfile((p) => ({
-                  ...p,
-                  preferences: { ...p.preferences, theme: "dark" },
-                }));
-                setAppTheme("dark");
-              }}
+              onClick={() => updatePreferences({ ...profile.preferences, theme: "dark" })}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all ${
                 profile.preferences.theme === "dark"
                   ? "bg-blue-600 text-white shadow-xs"
@@ -194,15 +178,7 @@ export default function PreferencesForm({
         </div>
       </div>
 
-      <div className="pt-2">
-        <button
-          type="submit"
-          disabled={loading}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition-all shadow-md active:scale-95 disabled:opacity-50"
-        >
-          {loading ? "Saving Preferences..." : "Save Preferences"}
-        </button>
-      </div>
-    </form>
+      {loading && <p className="text-xs text-slate-500">Saving preference...</p>}
+    </div>
   );
 }
