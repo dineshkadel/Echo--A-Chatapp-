@@ -14,7 +14,7 @@ const DEFAULT_PREFERENCES = {
 };
 
 export default function PreferencesSettingsPage() {
-  const { setTheme } = useTheme();
+  const { theme } = useTheme();
   const [profile, setProfile] = useState<UserProfileData | null>(null);
   const [fetching, setFetching] = useState(true);
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -32,11 +32,9 @@ export default function PreferencesSettingsPage() {
             phone: data.user.phone || "",
             avatar: data.user.avatar || "",
             bio: data.user.bio || "",
-            preferences: userPrefs,
+            // Keep the active cookie theme when the database has an older value.
+            preferences: { ...userPrefs, theme },
           });
-          if (userPrefs.theme === "light" || userPrefs.theme === "dark") {
-            setTheme(userPrefs.theme);
-          }
         }
       })
       .catch((err) => {
@@ -44,7 +42,7 @@ export default function PreferencesSettingsPage() {
         setMessage({ text: "Failed to load preferences.", type: "error" });
       })
       .finally(() => setFetching(false));
-  }, [setTheme]);
+  }, []);
 
   if (fetching) {
     return (
