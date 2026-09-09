@@ -18,12 +18,20 @@ function applyTheme(theme: Theme) {
   root.classList.toggle("light", theme === "light");
 }
 
+function getCookieTheme(): Theme {
+  const value = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith("app-theme="))
+    ?.split("=")[1];
+
+  return value === "light" || value === "dark" ? value : "dark";
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window === "undefined") return "dark";
 
-    const storedTheme = localStorage.getItem("app-theme");
-    return storedTheme === "light" || storedTheme === "dark" ? storedTheme : "dark";
+    return getCookieTheme();
   });
 
   useEffect(() => {
@@ -32,7 +40,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
-    localStorage.setItem("app-theme", newTheme);
+    document.cookie = `app-theme=${newTheme}; path=/; max-age=31536000; SameSite=Lax`;
     applyTheme(newTheme);
   };
 

@@ -31,7 +31,7 @@ export const authOptions: NextAuthOptions = {
 
                 const isValid = await bcrypt.compare(password, user.password);
                 if (!isValid) {
-                    throw new Error("Incorrect password");
+                    throw new Error("Incorrect email or password");
                 }
 
                 if (!user.isVerified) {

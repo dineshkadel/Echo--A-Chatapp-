@@ -1,6 +1,4 @@
-/**
- * In-Memory Rate Limiter and Cooldown Manager for Next.js API Routes.
- */
+
 
 interface RateLimitRecord {
   count: number;
@@ -29,10 +27,7 @@ setInterval(() => {
   }
 }, 5 * 60 * 1000);
 
-/**
- * Checks if a key has exceeded max requests within a given time window.
- * Returns { success: boolean, remaining: number, resetInSeconds: number }
- */
+
 export function checkRateLimit(key: string, limit: number, windowMs: number) {
   const now = Date.now();
   const record = rateLimitMap.get(key);
@@ -65,11 +60,7 @@ export function checkRateLimit(key: string, limit: number, windowMs: number) {
   };
 }
 
-/**
- * Checks if a key is currently in a cooldown period.
- * If not in cooldown, sets the last attempt timestamp to now.
- * Returns { success: boolean, remainingSeconds: number }
- */
+
 export function checkCooldown(key: string, cooldownMs: number) {
   const now = Date.now();
   const record = cooldownMap.get(key);

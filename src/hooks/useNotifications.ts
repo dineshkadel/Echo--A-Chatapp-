@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { getSocket } from "@/src/lib/socket";
+import { parseJsonResponse } from "@/src/lib/apiResponse";
 
 export interface NotificationItem {
   _id: string;
@@ -37,7 +38,7 @@ export function useNotifications() {
     if (status !== "authenticated") return;
 
     fetch("/api/notifications/unread-count")
-      .then((res) => res.json())
+      .then((res) => parseJsonResponse<{ count?: number }>(res))
       .then((data) => {
         if (typeof data.count === "number") {
           setUnreadCount(data.count);
@@ -55,7 +56,7 @@ export function useNotifications() {
         if (unreadOnly) params.set("unreadOnly", "true");
 
         const res = await fetch(`/api/notifications?${params.toString()}`);
-        const data = await res.json();
+        const data = await parseJsonResponse<{ notifications?: NotificationItem[] }>(res);
 
         if (data.notifications) {
           setNotifications(data.notifications);
