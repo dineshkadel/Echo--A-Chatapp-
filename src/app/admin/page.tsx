@@ -1,11 +1,11 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { AdminHeader } from "@/src/components/admin/admin-header";
-import { StatsOverview } from "@/src/components/admin/stats-overview";
-import { ActionAlert } from "@/src/components/admin/action-alert";
-import { UserTable } from "@/src/components/admin/user-table";
-import { useAdminUsers } from "@/src/components/admin/use-admin-users";
+import { AdminHeader } from "@/src/modules/admin/admin-header";
+import { StatsOverview } from "@/src/modules/admin/stats-overview";
+import { ActionAlert } from "@/src/modules/admin/action-alert";
+import { UserTable } from "@/src/modules/admin/user-table";
+import { useAdminUsers } from "@/src/modules/admin/use-admin-users";
 
 function LoadingScreen() {
   return (

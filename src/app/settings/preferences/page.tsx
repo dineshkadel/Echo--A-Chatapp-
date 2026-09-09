@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { Bell, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
-import PreferencesForm from "@/src/components/settings/preferences-form";
-import { UserProfileData } from "@/src/components/settings/profile-form";
+import PreferencesForm from "@/src/modules/settings/preferences-form";
+import { UserProfileData } from "@/src/modules/settings/profile-form";
 import { useTheme } from "@/src/context/ThemeContext";
 
 const DEFAULT_PREFERENCES = {

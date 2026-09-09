@@ -6,10 +6,10 @@ import { useSocket } from "@/src/hooks/useSocket";
 import { useNotifications } from "@/src/hooks/useNotifications";
 import { getSocket } from "@/src/lib/socket";
 import { parseJsonResponse } from "@/src/lib/apiResponse";
-import ChatHeader from "@/src/components/chat/ChatHeader";
-import ChatSidebar from "@/src/components/chat/ChatSidebar";
-import ChatWindow from "@/src/components/chat/ChatWindow";
-import type { ConversationItem, MessageItem, Participant } from "@/src/components/chat/chat-types";
+import ChatHeader from "@/src/modules/chat/ChatHeader";
+import ChatSidebar from "@/src/modules/chat/ChatSidebar";
+import ChatWindow from "@/src/modules/chat/ChatWindow";
+import type { ConversationItem, MessageItem, Participant } from "@/src/modules/chat/chat-types";
 
 export default function ChatPage() {
   const { data: session, status } = useSession();

@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Lock, CheckCircle2, AlertCircle } from "lucide-react";
-import SecurityForm from "@/src/components/settings/security-form";
+import { Lock } from "lucide-react";
+import SecurityForm from "@/src/modules/settings/security-form";
+import { DismissableAlert } from "@/components/ui/dismissable-alert";
 
 export default function SecuritySettingsPage() {
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -21,18 +22,11 @@ export default function SecuritySettingsPage() {
       </div>
 
       {/* Alert Banner */}
-      {message && (
-        <div
-          className={`p-4 rounded-xl text-xs flex items-center gap-2.5 border ${
-            message.type === "success"
-              ? "bg-emerald-950/60 border-emerald-800 text-emerald-200"
-              : "bg-red-950/60 border-red-800 text-red-200"
-          }`}
-        >
-          {message.type === "success" ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-          <span>{message.text}</span>
-        </div>
-      )}
+      <DismissableAlert
+        type={message?.type ?? "error"}
+        message={message?.text ?? null}
+        onDismiss={() => setMessage(null)}
+      />
 
       <SecurityForm setMessage={setMessage} />
     </div>

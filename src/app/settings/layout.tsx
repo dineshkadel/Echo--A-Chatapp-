@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft, Settings } from "lucide-react";
-import SettingsSidebar from "@/src/components/settings/settings-sidebar";
+import SettingsSidebar from "@/src/modules/settings/settings-sidebar";
 
 export default function SettingsLayout({
   children,

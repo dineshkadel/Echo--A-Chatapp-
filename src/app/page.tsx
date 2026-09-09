@@ -1,9 +1,9 @@
 "use client";
 
-import { FullScreenLoader } from "@/src/components/shared/full-screen-loader";
-import { SiteHeader } from "@/src/components/index/site-header";
-import { HeroSection } from "@/src/components/index/hero";
-import { SiteFooter } from "@/src/components/index/site-footer";
+import { FullScreenLoader } from "@/src/modules/shared/full-screen-loader";
+import { SiteHeader } from "@/src/modules/index/site-header";
+import { HeroSection } from "@/src/modules/index/hero";
+import { SiteFooter } from "@/src/modules/index/site-footer";
 import { useAuthRedirect } from "@/src/hooks/use-auth-redirect";
 
 export default function Home() {

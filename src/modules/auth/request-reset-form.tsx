@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { ArrowRight, Loader2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AuthStatus } from "@/src/components/auth/auth-status";
+import { AuthStatus } from "@/src/modules/auth/auth-status";
 
 export function RequestResetForm({ onSent }: { onSent: (email: string, expiresAt: number) => void }) {
   const [email, setEmail] = useState("");

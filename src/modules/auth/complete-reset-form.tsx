@@ -4,8 +4,8 @@ import { FormEvent, useState } from "react";
 import { ArrowLeft, Check, KeyRound, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AuthStatus } from "@/src/components/auth/auth-status";
-import { OtpCountdown } from "@/src/components/auth/otp-countdown";
+import { AuthStatus } from "@/src/modules/auth/auth-status";
+import { OtpCountdown } from "@/src/modules/auth/otp-countdown";
 
 export function CompleteResetForm({ email, expiresAt, onBack, onReset }: { email: string; expiresAt: number; onBack: () => void; onReset: () => void }) {
   const [otp, setOtp] = useState("");

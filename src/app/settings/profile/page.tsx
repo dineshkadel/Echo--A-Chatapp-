@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Loader2, CheckCircle2, AlertCircle, User } from "lucide-react";
-import ProfileForm, { UserProfileData } from "@/src/components/settings/profile-form";
+import ProfileForm, { UserProfileData } from "@/src/modules/settings/profile-form";
 
 const DEFAULT_PREFERENCES = {
   soundEnabled: true,

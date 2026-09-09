@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AuthShell } from "@/src/components/auth/auth-shell";
-import { AuthStatus } from "@/src/components/auth/auth-status";
-import { RequestResetForm } from "@/src/components/auth/request-reset-form";
-import { CompleteResetForm } from "@/src/components/auth/complete-reset-form";
+import { AuthShell } from "@/src/modules/auth/auth-shell";
+import { AuthStatus } from "@/src/modules/auth/auth-status";
+import { RequestResetForm } from "@/src/modules/auth/request-reset-form";
+import { CompleteResetForm } from "@/src/modules/auth/complete-reset-form";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
